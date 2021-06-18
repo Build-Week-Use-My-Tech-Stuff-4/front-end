@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import React, {useState} from 'react'
 import './App.css';
+import Login from "./components/Login"
+
+const initialFormValues = {
+  email: "",
+  password: ""
+}
 
 function App() {
+
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  setFormValues({
+    ...formValues,
+    [name]: value 
+  })
+};
+
+const formSubmit = () => {
+  const newLogin = {
+    email: formValues.email.trim(),
+    password: formValues.password.trim(),
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Login
+      values={formValues}
+      submit={formSubmit}
+      />
     </div>
   );
 }
