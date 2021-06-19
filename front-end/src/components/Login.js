@@ -1,49 +1,44 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
-
-
-const initialFormValues = {
-    email: "",
-    password: ""
-  };
 
 export default function Login() {
-    const [formValues, setFormValues] = useState(initialFormValues);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  setFormValues({
-    ...formValues,
-    [name]: value
-  })
-};
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
 
-const formSubmit = () => {
-  const newLogin = {
-    email: formValues.email.trim(),
-    password: formValues.password.trim(),
-  };
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
 
-    return (
-        <div>
-            <form className="logInForm">
-                <lable>Email:
-                    <input 
-                    type="text" 
-                    id="email"
-                    name="email"
-                    value={formValues.email}
-                    placeholder="Enter email here"/>
-                </lable>
-                    <br/>
-                <lable>Password
-                    <input 
-                    type="text" 
-                    id="password"
-                    name="password" 
-                    value={formValues.password}
-                    placeholder="Enter password here"/>
-                </lable>
-                    <button onSubmit={formSubmit}>Login</button>
-            </form>
-        </div>
-    )
-};   
+  return (
+    <div className="Login">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            autoFocus
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button block size="lg" type="submit" disabled={!validateForm()}>
+          Login
+        </Button>
+      </Form>
+    </div>
+  );
+}
