@@ -1,5 +1,5 @@
 import {
-    LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE,
+    LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS,
     REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE,
     FETCHING_USERS, FETCHING_USERS_SUCCESS, FETCHING_USERS_FAILURE, 
 }
@@ -17,7 +17,7 @@ const initialState = {
     user_id: null,
 }
 
-const reducer = ( state = initialState, action ) => {
+export const reducer = ( state = initialState, action ) => {
     switch(action.type) {
 
 // Login 
@@ -101,4 +101,4 @@ const reducer = ( state = initialState, action ) => {
         }
     }
     
-    export default reducer;
+    

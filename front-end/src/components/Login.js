@@ -1,44 +1,71 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { login } from '../actions/index';
+import Loader from 'react-loader-spinner';
 
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      credentials: {
+        username: '',
+        password: '',
+      }
+    }
   }
 
-  function handleSubmit(event) {
+  handleSubmit = event => {
+    this.setState({
+      credentials: {
+        ...this.state.credentials,
+        [event.target.name]: event.target.value
+      }
+    })
+  };
+
+  login = event => {
     event.preventDefault();
-  }
+    this.props.login({
+      username: this.state.credentials.username, 
+      password: this.state.credentials.password,
+      email: this.state.credentials.email}).then(() => {
+        this.props.history.push('/');
+    })
+}
 
+render () {
   return (
-    <div className="Login">
-      <Form onSubmit={handleSubmit}>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
-          Login
-        </Button>
-      </Form>
-    </div>
+    <form
+    onSubmit={this.login}>
+      <div
+        className="inputs">
+        <input
+          name="username"
+          onChange={this.handleSubmit}
+          value={this.state.username}
+          placeholder="Username"
+          type="text"
+        />
+        <input
+          name="password"
+          type="password"
+          onChange={this.handleSubmit}
+          value={this.state.password}
+          placeholder="Password"
+        />
+      </div>
+    <button
+      type="submit">
+    </button>
+  </form>
   );
 }
+}
+
+const mapStateToProps = state => ({
+  error: state.error,
+  loggingIn: state.loggingIn
+})
+
+export default connect(mapStateToProps,{ login })(Login);
