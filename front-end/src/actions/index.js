@@ -42,9 +42,9 @@ export const register = creds => dispatch => {
     return axios
         .post('https://ptpt-use-my-tech-4.herokuapp.com/api/auth/register', creds)
         .then(response => { 
-            console.log('register!', response.data);
-            userID = response.data.id;
-            console.log('register ID', response.data.id);
+            console.log('register', response.data);
+            userID = response.data.user_id;
+            console.log('register ID', response.data.user_id);
             dispatch({ type: REGISTER_SUCCESS, payload: response.data})
         })
         .then(() => dispatch(fetchingUser(userID)))
@@ -61,7 +61,7 @@ export const FETCHING_USERS_FAILURE = 'FETCHING_USERS_FAILURE';
 export const fetchingUser = (id) => dispatch => {
     dispatch({ type: FETCHING_USERS })
     return axios
-        .get(`https://ptpt-use-my-tech-4.herokuapp.com/api/users${id}`)
+        .get(`https://ptpt-use-my-tech-4.herokuapp.com/api/users/${id}`)
         .then(response => {
             console.log(response.data);
             dispatch({ type: FETCHING_USERS_SUCCESS, payload: response.data })
