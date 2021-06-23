@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { register } from '../actions';
-import { Link } from "react-router-dom";
+import { RegisterContainer, InputField, SubmitBtn } from '../styles/StyledComponents';
 
 class Register extends React.Component {
   state = {
@@ -58,55 +58,54 @@ class Register extends React.Component {
 
   render() {
     return(
+      <RegisterContainer>
       <form>
         <hi>Please Register!</hi>
-        <div
-          className="inputs">
-          <input
+          <InputField
            name = 'username'
            placeholder = 'Username'
            type = 'text'
            value = {this.state.credentials.user_name}
            onChange = {this.handleChange}
           />
-          <input
+          <InputField
             name = 'password'
             placeholder = 'Password'
             type = 'password'
             value = {this.state.credentials.password}
             onChange = {this.handleChange}
           />
-          <input
+          <InputField
               name = 'email'
               placeholder = 'Email Address'
               type = 'text'
               value = {this.state.credentials.email}
               onChange = {this.handleChange}
           />
-          <input
+          <InputField
               name = 'city'
               placeholder = 'city'
               type = 'text'
               value = {this.state.credentials.city}
               onChange = {this.handleChange}
           />
-          <input
+          <InputField
               name = 'state'
               placeholder = 'state'
               type = 'text'
               value = {this.state.credentials.state}
               onChange = {this.handleChange}
           />
-          <input
+          <InputField
               name = 'zip'
               placeholder = 'zip'
               type = 'text'
               value = {this.state.credentials.zip}
               onChange = {this.handleChange}
           />
-        </div>
-      <button onClick = {this.register}>Register</button>
+      <SubmitBtn onClick = {this.register}>Register</SubmitBtn>
     </form>
+    </RegisterContainer>
     );
 } 
 }

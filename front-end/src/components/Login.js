@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { login } from '../actions/index';
+import { LoginContainer, InputField, SubmitBtn } from '../styles/StyledComponents';
 import Loader from 'react-loader-spinner';
 
 
@@ -27,7 +28,7 @@ class Login extends React.Component {
   login = event => {
     event.preventDefault();
     this.props.login({
-      username: this.state.credentials.username, 
+      username: this.state.credentials.user_name, 
       password: this.state.credentials.password,
       email: this.state.credentials.email}).then(() => {
         this.props.history.push('/');
@@ -36,29 +37,26 @@ class Login extends React.Component {
 
 render () {
   return (
-    <form
-    onSubmit={this.login}>
-      <div
-        className="inputs">
-        <input
-          name="username"
-          onChange={this.handleSubmit}
-          value={this.state.username}
-          placeholder="Username"
-          type="text"
-        />
-        <input
-          name="password"
-          type="password"
-          onChange={this.handleSubmit}
-          value={this.state.password}
-          placeholder="Password"
-        />
-      </div>
-    <button
-      type="submit">
-    </button>
+    <LoginContainer>
+    <h1>Please Login</h1>
+    <form onSubmit={this.login}>
+      <InputField
+        type='text'
+        name='username'
+        placeholder='Username'
+        onChange={(e) => {this.handleSubmit(e)}}
+        value={this.state.credentials.user_name}
+      />
+      <InputField
+        type='password'
+        name='password'
+        placeholder='Password'
+        onChange={this.handleSubmit}
+        value={this.state.credentials.password}
+      />
+     <SubmitBtn>{ this.props.loggingIn ? (<Loader type="spinner" color="white" height="12" width="26" />) : ('Login')}</SubmitBtn>
   </form>
+  </LoginContainer>
   );
 }
 }
