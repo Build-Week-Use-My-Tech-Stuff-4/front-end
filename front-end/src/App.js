@@ -10,7 +10,9 @@ class App extends Component {
   render() {
     return (
       <Router>
+      {/* added exact to login route to make it easier for testing */}
          <Route 
+         exact
             path = '/'
             component = {Login}
           />
