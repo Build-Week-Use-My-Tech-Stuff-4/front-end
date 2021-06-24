@@ -6,7 +6,7 @@ import { RegisterContainer, InputField, SubmitBtn } from '../styles/StyledCompon
 class Register extends React.Component {
   state = {
     credentials: {
-      user_name: '',
+      username:'',
       email:'',
       password:'',
       city:'',
@@ -35,22 +35,14 @@ class Register extends React.Component {
     register = event => {
       event.preventDefault();
       this.props.register({
-          username: this.state.credentials.user_name, 
+          username: this.state.credentials.username, 
           password: this.state.credentials.password,
-          email: this.state.credentials.email, 
-          city: this.state.credentials.city,
-          state: this.state.credentials.state, 
-          zip: this.state.credentials.zip,
       });
 
       this.setState({
           credentials: {
               username: '',
               password: '',
-              email: '',
-              city: '',
-              state: '',
-              zip: '',
           }
       });
       this.props.history.push('/')
@@ -65,7 +57,7 @@ class Register extends React.Component {
            name = 'username'
            placeholder = 'Username'
            type = 'text'
-           value = {this.state.credentials.user_name}
+           value = {this.state.credentials.username}
            onChange = {this.handleChange}
           />
           <InputField
@@ -74,34 +66,6 @@ class Register extends React.Component {
             type = 'password'
             value = {this.state.credentials.password}
             onChange = {this.handleChange}
-          />
-          <InputField
-              name = 'email'
-              placeholder = 'Email Address'
-              type = 'text'
-              value = {this.state.credentials.email}
-              onChange = {this.handleChange}
-          />
-          <InputField
-              name = 'city'
-              placeholder = 'city'
-              type = 'text'
-              value = {this.state.credentials.city}
-              onChange = {this.handleChange}
-          />
-          <InputField
-              name = 'state'
-              placeholder = 'state'
-              type = 'text'
-              value = {this.state.credentials.state}
-              onChange = {this.handleChange}
-          />
-          <InputField
-              name = 'zip'
-              placeholder = 'zip'
-              type = 'text'
-              value = {this.state.credentials.zip}
-              onChange = {this.handleChange}
           />
       <SubmitBtn onClick = {this.register}>Register</SubmitBtn>
     </form>

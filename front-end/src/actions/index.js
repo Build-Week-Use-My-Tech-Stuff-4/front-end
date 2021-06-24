@@ -13,7 +13,7 @@ export const login = creds => dispatch => {
         .post('https://ptpt-use-my-tech-4.herokuapp.com/api/auth/login', creds)
         .then(response => {
             console.log('login', response.data,);
-            userID = response.data.user_name
+            userID = response.data.username
             localStorage.setItem('token', response.data.token);
             dispatch({ type: LOGIN_SUCCESS, payload: response.data })
         })
