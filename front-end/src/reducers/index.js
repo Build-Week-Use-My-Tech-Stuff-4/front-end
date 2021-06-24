@@ -4,7 +4,7 @@ import {
     FETCHING_USERS, FETCHING_USERS_SUCCESS, FETCHING_USERS_FAILURE, 
     FETCHING_TECH, FETCHING_TECH_SUCCESS, FETCHING_TECH_FAILURE,
     DELETE_TECH, DELETE_TECH_SUCCESS, DELETE_TECH_FAILURE,
-    UPDATE_TECH, UPDATE_TECH_SUCCESS, UPDATE_TECH_FAILURE,
+    // UPDATE_TECH, UPDATE_TECH_SUCCESS, UPDATE_TECH_FAILURE,
     ADD_TECH, ADD_TECH_SUCCESS, ADD_TECH_FAILURE, 
 }
 
@@ -138,7 +138,7 @@ export const reducer = ( state = initialState, action ) => {
             return {
                  ...state,
                 addingTech: false,
-                tech: [...state.tech,{ ...action.payload, user: state.user.user_name}],
+                tech: [...state.tech,{ ...action.payload, user: state.user.username}],
                 error: null
              }
         case ADD_TECH_FAILURE:

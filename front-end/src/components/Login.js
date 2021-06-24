@@ -28,7 +28,7 @@ class Login extends React.Component {
   login = event => {
     event.preventDefault();
     this.props.login({
-      username: this.state.credentials.user_name, 
+      username: this.state.credentials.username, 
       password: this.state.credentials.password,
       email: this.state.credentials.email}).then(() => {
         this.props.history.push('/');
@@ -45,7 +45,7 @@ render () {
         name='username'
         placeholder='Username'
         onChange={(e) => {this.handleSubmit(e)}}
-        value={this.state.credentials.user_name}
+        value={this.state.credentials.username}
       />
       <InputField
         type='password'
@@ -54,7 +54,7 @@ render () {
         onChange={this.handleSubmit}
         value={this.state.credentials.password}
       />
-     <SubmitBtn>{ this.props.loggingIn ? (<Loader type="spinner" color="white" height="12" width="26" />) : ('Login')}</SubmitBtn>
+     <SubmitBtn>{ this.props.loggingIn ? (<Loader type="ThreeDots" color="white" height="12" width="26" />) : ('Login')}</SubmitBtn>
   </form>
   </LoginContainer>
   );
