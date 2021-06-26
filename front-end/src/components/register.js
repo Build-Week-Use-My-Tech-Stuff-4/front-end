@@ -31,11 +31,11 @@ class Register extends React.Component {
             }
         });
     }
-
+// changed username to user_name in register **************
     register = event => {
       event.preventDefault();
       this.props.register({
-          username: this.state.credentials.username, 
+          user_name: this.state.credentials.username, 
           password: this.state.credentials.password,
       });
 
@@ -52,7 +52,7 @@ class Register extends React.Component {
     return(
       <RegisterContainer>
       <form>
-        <hi>Please Register!</hi>
+        <h1>Please Register!</h1>
           <InputField
            name = 'username'
            placeholder = 'Username'
