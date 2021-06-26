@@ -28,9 +28,9 @@ class Login extends React.Component {
   login = event => {
     event.preventDefault();
     this.props.login({
-      username: this.state.credentials.username, 
+      user_name: this.state.credentials.username, 
       password: this.state.credentials.password,
-      email: this.state.credentials.email}).then(() => {
+      }).then(() => {
         this.props.history.push('/');
     })
 }
