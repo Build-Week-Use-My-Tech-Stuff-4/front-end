@@ -46,3 +46,7 @@ export const RegisterContainer = styled.div `
     margin: auto;
     margin-top: 150px;
 `;
+
+export const H1 = styled.div `
+
+`;

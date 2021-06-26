@@ -1,17 +1,13 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { register } from '../actions';
-import { RegisterContainer, InputField, SubmitBtn } from '../styles/StyledComponents';
+import { RegisterContainer, InputField, SubmitBtn, H1 } from '../styles/StyledComponents';
 
 class Register extends React.Component {
   state = {
     credentials: {
       username:'',
-      email:'',
       password:'',
-      city:'',
-      state:'',
-      zip:'',  
     }
   }
       // user_name: '',
@@ -35,7 +31,7 @@ class Register extends React.Component {
     register = event => {
       event.preventDefault();
       this.props.register({
-          username: this.state.credentials.username, 
+          user_name: this.state.credentials.username, 
           password: this.state.credentials.password,
       });
 
@@ -52,7 +48,7 @@ class Register extends React.Component {
     return(
       <RegisterContainer>
       <form>
-        <hi>Please Register!</hi>
+        <H1>Please Register!</H1>
           <InputField
            name = 'username'
            placeholder = 'Username'

@@ -6,18 +6,18 @@ export const LOGIN = "LOGIN";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const login = creds => dispatch => {
+export const login = credential => dispatch => {
     dispatch({ type: LOGIN })
-    let userID = null;
-    return axios
-        .post('https://ptpt-use-my-tech-4.herokuapp.com/api/auth/login', creds)
+    
+    axiosWithAuth()
+        .post('https://ptpt-use-my-tech-4.herokuapp.com/api/auth/login', credential)
         .then(response => {
             console.log('login', response.data,);
-            userID = response.data.username
-            localStorage.setItem('token', response.data.token);
+            window.localStorage.setItem('token', response.data.token);
+            window.localStorage.setItem("user_id", response.data.id)
             dispatch({ type: LOGIN_SUCCESS, payload: response.data })
         })
-        .then(() => dispatch(fetchingUser(userID)))
+        
         .catch(err => {
             dispatch({ type: LOGIN_FAILURE, payload: err })
         })
@@ -36,18 +36,15 @@ export const REGISTER = "REGISTER";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
-export const register = creds => dispatch => {
+export const register = credential => dispatch => {
     dispatch({ type: REGISTER })
-    let userID = null;
-    return axios
-        .post('https://ptpt-use-my-tech-4.herokuapp.com/api/auth/register', creds)
+    axiosWithAuth()
+        .post('https://ptpt-use-my-tech-4.herokuapp.com/api/auth/register', credential)
         .then(response => { 
             console.log('register', response.data);
-            userID = response.data.user_id;
             console.log('register ID', response.data.user_id);
             dispatch({ type: REGISTER_SUCCESS, payload: response.data})
         })
-        .then(() => dispatch(fetchingUser(userID)))
         .catch(err => {
             dispatch({ type: REGISTER_FAILURE, payload: err })
         })

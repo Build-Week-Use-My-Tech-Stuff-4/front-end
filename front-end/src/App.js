@@ -11,6 +11,7 @@ class App extends Component {
     return (
       <Router>
          <Route 
+            exact
             path = '/'
             component = {Login}
           />
