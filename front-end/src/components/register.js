@@ -6,7 +6,7 @@ import { RegisterContainer, InputField, SubmitBtn, H1 } from '../styles/StyledCo
 class Register extends React.Component {
   state = {
     credentials: {
-      username:'',
+      user_name:'',
       password:'',
     }
   }
