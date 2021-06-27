@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import Login from "./components/Login";
-import Services from './components/Services';
-import About from './components/About';
-import Login from './components/pages/Login';
+import About from './components/pages/About';
+import Login from './components/Login';
 import Register from './components/pages/Register';
+import Navbar from './components/Navbar'
+import Home from './components/pages/Home'
+
 
 // import { logout } from "./actions";
 
@@ -17,7 +18,6 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route path='/' exact component={Home} />
-          <Route path='/services' component={Services} />
           <Route path='/about' component={About} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
