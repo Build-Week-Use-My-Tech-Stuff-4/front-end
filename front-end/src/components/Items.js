@@ -7,8 +7,6 @@ import styled from 'styled-components';
 import NavBar from './Navbar';
 
 class Items extends React.Component {
-
-
     componentDidMount() {
         this.props.fetchingTech();
     }
@@ -25,7 +23,7 @@ class Items extends React.Component {
     }
 }
 
-const mapStateToProps = ({ items, fetchingTech}) => ({
+const mapStateToProps = ({ items, fetchingTech }) => ({
     items,
     fetchingTech
 });

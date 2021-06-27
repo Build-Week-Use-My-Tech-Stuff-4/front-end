@@ -31,7 +31,7 @@ class TechForm extends React.Component {
 
     submitItem = e => {
         e.preventDefault();
-        this.props.addItem(this.state.item).then(() => {
+        this.props.addingTech(this.state.item).then(() => {
             this.props.history.push('/items');
         });
         this.setState({
