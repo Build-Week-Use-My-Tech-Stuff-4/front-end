@@ -9,7 +9,7 @@ const Item = props => {
             <div class="card-body">
                 <h5 class="card-title">{props.item.title}</h5>
                 <p class="card-text">{props.item.description}</p>
-                <Link to={`/items/${props.item.id}`}>
+                <Link to={`/items/${props.item_id}`}>
                     <button class="btn btn-info btn-sm">More Details</button>
                 </Link>
             </div>

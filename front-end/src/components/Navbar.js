@@ -44,7 +44,7 @@ const NavContent=styled.div`
         font-size: 20px;
         margin-top: 10px;
         a{
-            color: white;
+            color: grey;
         }
     }
 `

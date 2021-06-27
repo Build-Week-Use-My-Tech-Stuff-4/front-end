@@ -94,7 +94,7 @@ class TechForm extends React.Component {
                         <input
                             type="integer"
                             name="price"
-                            value={this.state.item.price}
+                            value={this.state.item.price_per_day}
                             onChange={this.handleItemChange}
                         />
                     </label>

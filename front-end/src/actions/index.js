@@ -84,7 +84,7 @@ export const TECH_DETAIL_FAILURE = 'ITEM_DETAIL_FAILURE';
 export const techDetail = id => dispatch => {
     dispatch ({type: TECH_DETAIL});
     // const headers = {Authorization: localStorage.getItem('token')}
-    return axios.get('https://ptpt-use-my-tech-4.herokuapp.com/api/items/' + id).then(res => {
+    return axios.get('https://ptpt-use-my-tech-4.herokuapp.com/api/items/{item_id}').then(res => {
         console.log(res)
         dispatch({type: TECH_DETAIL_SUCCESS, payload: res.data})
     })
@@ -120,7 +120,7 @@ export const DELETE_TECH_FAILURE = 'DELETE_TECH_FAILURE';
 export const deleteTech = id => dispatch => {
     dispatch({ type: DELETE_TECH });
   return axios
-    .delete('https://ptpt-use-my-tech-4.herokuapp.com/api/items' + id, {
+    .delete('https://ptpt-use-my-tech-4.herokuapp.com/api/items/{item_id}' + id, {
       headers: { Authorization: localStorage.getItem('token') }
     })
     .then(res => {
@@ -140,7 +140,7 @@ export const editTech = item => dispatch => {
     dispatch({ type: EDIT_TECH });
   console.log(item.id)
   return axios
-    .put(`https://ptpt-use-my-tech-4.herokuapp.com/api/items/${item.id}`, item, {
+    .put(`https://ptpt-use-my-tech-4.herokuapp.com/api/items/{item_id}`, item, {
       headers: { Authorization: localStorage.getItem('token') }
     })
     .then(res => {
