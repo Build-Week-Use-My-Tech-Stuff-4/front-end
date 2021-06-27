@@ -1,125 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import * as Yup from 'yup';
+import React from 'react';
+import { connect } from "react-redux";
+import { register } from '../actions';
+import { RegisterContainer, InputField, Btn } from '../styles/StyledComponents';
 
-
-const Form = () => {
-  const [userData, setUserData] = useState({
-      name: '',
-
-  })
-
-  const [userDataSet, setUserDataSet] = useState(false);
-  const [disabled, setDisabled] = useState(true);
-
-  const { name, email, password} = userData;
-
-
-  const validUser = Yup.object().shape({
-          name: yup
-          .string()
-          .trim()
-          .min(2, "First name must be 2+ characters")
-          .required("First name is a required fireld"),
-          password: yup
-          .string()
-          .trim()
-          .min(5, "Password must be 5+ characters")
-          .max(25, "Password must be 25 or less characters")
-          .required("Password is a required fireld"),
-          email: yup
-          .string()
-          .email('Must be a valid email')
-          .trim()
-          .required("Email is required"),
-          terms: yup.boolean().oneOf([true], 'You must accept the Terms of Service'),
-  });
-
-  const submitHandler = e => {
-      e.preventDefault();
-      console.log(order);
-      setOrderPlaced(true);
+class Register extends React.Component {
+  state = {
+    credentials: {
+      user_name:'',
+      password:'',
+    }
   }
 
-  useEffect(()=>{
-      schema.isValid(order).then(valid => setDisabled(!valid))
-  }, [order])
+    handleChange = event => {
+        this.setState({
+            credentials: {
+                ...this.state.credentials,
+                [event.target.name]: event.target.value
+            }
+        });
+    }
+// changed username to user_name in register **************
+    register = event => {
+      event.preventDefault();
+      this.props.register({
+          user_name: this.state.credentials.username, 
+          password: this.state.credentials.password,
+      });
 
-  return (
-    /*form goes here*/
-    <form className="form-container" onSubmit={formSubmit}>
-      <div className="all-center">
-        <h2>Please Register!</h2>
+      this.setState({
+          credentials: {
+              user_name: '',
+              password: '',
+          }
+      });
+      this.props.history.push('/')
+  };
 
-        {/* // Text Input // */}
-        <label htmlFor="name">
-          Name:&nbsp;
-          <input
-            value={formState.fname}
-            onChange={inputChange}
-            id="name"
-            name='name'
-            type='text'
-            placeholder='NAME'
+  render() {
+    return(
+      <RegisterContainer>
+      <form>
+        <h1>Please Register!</h1>
+          <InputField
+           name = 'username'
+           placeholder = 'Username'
+           type = 'text'
+           value = {this.state.credentials.username}
+           onChange = {this.handleChange}
           />
-        </label>
-
-        <label htmlFor="emailInput">
-          Email:&nbsp;
-          <input
-            value={formState.email}
-            onChange={inputChange}
-            id="email"
-            name='email'
-            type='text'
-            placeholder='youremail@email.com'
+          <InputField
+            name = 'password'
+            placeholder = 'Password'
+            type = 'password'
+            value = {this.state.credentials.password}
+            onChange = {this.handleChange}
           />
-        </label>
-
-        <label htmlFor="passwordInput">
-          Password:&nbsp;
-          <input
-            value={formState.password}
-            onChange={inputChange}
-            id="passwordInput"
-            name='password'
-            type='password'
-            placeholder='Password'
-          />
-        </label>
-
-        {/* ERRORS */}
-        <div className="alert">
-          <div>{errors.fname}</div>
-          <div>{errors.lname}</div>
-          <div>{errors.email}</div>
-          <div>{errors.password}</div>
-        </div>
-
-        <div className="form-checkbox">
-          <label htmlFor="termsInput">
-            <h4> Do you agree to the Terms of Service?</h4> &nbsp;
-            <input
-              type="checkbox"
-              name="terms"
-              id="termsInput"
-              checked={formState.terms}
-              onChange={inputChange}
-              />
-          </label>
-      </div>
-
-      {/* Submit Button */}
-      <div className="submit-btn">
-        {/* disable until form is complete */}
-        <button className="btn" disabled={btnDisabled} type="submit">
-          Submit
-        </button>
-        </div>
-        {/* ends form submit div */}
-      </div>
-      {/* ends form text div */}
+      <Btn onClick = {this.register}>Register</Btn>
     </form>
-  );
-};
+    </RegisterContainer>
+    );
+} 
+}
 
-export default Form;
+const mapStateToProps = state => ({
+  isRegistered: state.isRegistered,
+  error: state.error,
+})
+
+export default connect(mapStateToProps, { register })(Register);
