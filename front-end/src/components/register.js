@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { register } from '../actions';
-import { RegisterContainer, InputField, SubmitBtn, H1 } from '../styles/StyledComponents';
+import { RegisterContainer, InputField, Btn } from '../styles/StyledComponents';
 
 class Register extends React.Component {
   state = {
@@ -29,7 +29,7 @@ class Register extends React.Component {
 
       this.setState({
           credentials: {
-              username: '',
+              user_name: '',
               password: '',
           }
       });
@@ -55,7 +55,7 @@ class Register extends React.Component {
             value = {this.state.credentials.password}
             onChange = {this.handleChange}
           />
-      <SubmitBtn onClick = {this.register}>Register</SubmitBtn>
+      <Btn onClick = {this.register}>Register</Btn>
     </form>
     </RegisterContainer>
     );

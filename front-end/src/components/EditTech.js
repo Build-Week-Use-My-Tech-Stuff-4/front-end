@@ -1,65 +1,69 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {addingTech} from '../actions';
 import styled from 'styled-components';
-import NavBar from './Navbar';
+import {connect} from 'react-redux';
+import {editTech, techDetail} from '../actions';
 import {withRouter} from 'react-router-dom';
 
 
-
-class TechForm extends React.Component {
+class EditTech extends React.Component {
     state = {
-        item: {
-            title: '',
-            type: '',
-            description: '',
-            price: '',
-            availability: true,
-            imgURL: '',
-            owner: 1,
-        }
+        item: this.props.item,
+        editingItemId: null,
     };
 
-    handleItemChange = e => {
+    componentDidMount() {
+        this.props.itemDetail(this.props.match.params.id)
+
+        console.log(this.props.item)
+        // this.setState({
+        //      item: {
+        //          ...this.state.item,
+        //          title: this.props.item.title
+        //      }
+        // });
+    }
+
+    getItem = id => {
+        this.props.gettingDetail(id)
+    }
+
+    handleChange = e => {
+        let value = e.target.value;
+        if(e.target.name === 'price') {
+            value = value ? parseInt(value, 10) : null
+        }
         this.setState({
             item: {
                 ...this.state.item,
-                [e.target.name]: e.target.value
+                [e.target.name]: value
             }
-        });
+        })
     };
 
-    submitItem = e => {
+
+
+    updateItem = (e, item) => {
         e.preventDefault();
-        this.props.addItem(this.state.item).then(() => {
-            this.props.history.push('/items');
-        });
-        this.setState({
-            item: {
-            title: '',
-            type: '',
-            description: '',
-            price: '',
-            availability: '',
-            imgURL: '',
-            }
-        });
+        console.log('updateItem')
+        this.props.editItem(this.state.item).then(() => {
+            
+            this.setState({editingItemId: null});
+            this.props.history.push('/items')
+        })
     }
 
     render() {
         return (
             <div>
-                <NavBar/>
-                <h1>Rent out your equipment!</h1>
-                <h3>Add an item</h3>
-                <Form onSubmit={this.submitItem}>
+                <h1>Edit Item</h1>
+                <Form onSubmit={this.updateItem}>
                     <label>
                         Title
                         <input
                             type="text"
                             name="title"
                             value={this.state.item.title}
-                            onChange={this.handleItemChange}
+                            onChange={this.handleChange}
                         />
                     </label>
                     <label>
@@ -68,46 +72,46 @@ class TechForm extends React.Component {
                             type="text"
                             name="imgURL"
                             value={this.state.item.imgURL}
-                            onChange={this.handleItemChange}
+                            onChange={this.handleChange}
                         />
                     </label>
                     <label>
-                        Type of equipment
+                        Type
                         <input
                             type="text"
                             name="type"
                             value={this.state.item.type}
-                            onChange={this.handleItemChange}
+                            onChange={this.handleChange}
                         />
                     </label>
                     <label>
-                        Description
+                        description
                         <input
                             type="text"
                             name="description"
                             value={this.state.item.description}
-                            onChange={this.handleItemChange}
+                            onChange={this.handleChange}
                         />
                     </label> 
                     <label>
-                        Price
+                        price
                         <input
                             type="integer"
                             name="price"
                             value={this.state.item.price}
-                            onChange={this.handleItemChange}
+                            onChange={this.handleChange}
                         />
                     </label>
                     <label>
                         availability
                         <input
-                            type="text"
+                            type="boolean"
                             name="availability"
                             value={this.state.item.availability}
-                            onChange={this.handleItemChange}
+                            onChange={this.handleChange}
                         />
                     </label>
-                    <Button onClick={this.submitItem}>{this.props.addingTech ? "Loading" : "Add Item"}</Button>
+                    <Button onClick={this.updateItem}>{this.props.editingItem ? "Loading" : "Edit Item"}</Button>
 
                 </Form>
             </div>
@@ -116,17 +120,21 @@ class TechForm extends React.Component {
 
 }
 
-const mapStateToProps = ({owner, addingTech}) => ({
-    owner,
-    addingTech
+const mapStateToProps = ({ gettingDetail, item, editingItem }) => ({
+    gettingDetail,
+    editingItem,
+    item,
+   
 });
 
 export default withRouter(
     connect(
         mapStateToProps,
-        {addingTech}
-    )(TechForm)
+        { techDetail,editTech }
+    )(EditTech)
 );
+
+
 
     const Form = styled.div`
     display: flex;
@@ -157,8 +165,8 @@ export default withRouter(
     font-size: 18px;
     font-weight: 500;
     color: white;
-    background-color: grey;
-    border: 1px solid grey;
+    background-color: blueviolet;
+    border: 1px solid blueviolet;
     border-radius: 5px;
     cursor: pointer;
   `
