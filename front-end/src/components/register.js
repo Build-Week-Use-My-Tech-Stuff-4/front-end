@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { register } from '../actions';
-import { RegisterContainer, InputField, SubmitBtn } from '../styles/StyledComponents';
+import { RegisterContainer, InputField, SubmitBtn, H1 } from '../styles/StyledComponents';
 
 class Register extends React.Component {
   state = {

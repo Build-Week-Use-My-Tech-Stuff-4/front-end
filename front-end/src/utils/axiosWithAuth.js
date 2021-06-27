@@ -7,7 +7,7 @@ const axiosWithAuth = () => {
       headers: {
         authorization: token
       },
-      baseURL: "https://ptpt-use-my-tech-4.herokuapp.com/api/users"
+      baseURL: "https://ptpt-use-my-tech-4.herokuapp.com/api"
     });
 }
 

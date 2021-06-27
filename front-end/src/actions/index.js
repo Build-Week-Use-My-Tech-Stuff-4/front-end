@@ -17,7 +17,7 @@ export const login = creds => dispatch => {
             localStorage.setItem('token', response.data.token);
             dispatch({ type: LOGIN_SUCCESS, payload: response.data })
         })
-        .then(() => dispatch(userID))
+        .then(() => dispatch(fetchingUser(userID)))
         .catch(err => {
             dispatch({ type: LOGIN_FAILURE, payload: err })
         })
