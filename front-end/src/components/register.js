@@ -7,21 +7,9 @@ class Register extends React.Component {
   state = {
     credentials: {
       username:'',
-      email:'',
       password:'',
-      city:'',
-      state:'',
-      zip:'',  
     }
   }
-      // user_name: '',
-      // lname:'',
-      // email:'',
-      // password:'',
-      // terms:'',
-      // city:'',
-      // state:'',
-      // zip:'',
 
     handleChange = event => {
         this.setState({

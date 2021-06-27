@@ -17,7 +17,7 @@ export const login = creds => dispatch => {
             localStorage.setItem('token', response.data.token);
             dispatch({ type: LOGIN_SUCCESS, payload: response.data })
         })
-        .then(() => dispatch(fetchingUser(userID)))
+        .then(() => dispatch(userID))
         .catch(err => {
             dispatch({ type: LOGIN_FAILURE, payload: err })
         })
@@ -61,7 +61,7 @@ export const FETCHING_USERS_FAILURE = 'FETCHING_USERS_FAILURE';
 export const fetchingUser = (id) => dispatch => {
     dispatch({ type: FETCHING_USERS })
     return axios
-        .get(`https://ptpt-use-my-tech-4.herokuapp.com/api/users/${id}`)
+        // .get(`https://ptpt-use-my-tech-4.herokuapp.com/api/users/${id}`)
         .then(response => {
             console.log(response.data);
             dispatch({ type: FETCHING_USERS_SUCCESS, payload: response.data })
